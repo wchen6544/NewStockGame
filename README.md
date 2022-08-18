@@ -9,6 +9,4 @@ https://user-images.githubusercontent.com/63750347/185238155-edc4da94-0226-4428-
 # Newer
 
 
-
-https://user-images.githubusercontent.com/63750347/185276600-81900c33-d93f-41a7-831a-021d44e26dac.mov
-
+![Screen Shot 2022-08-17 at 10 07 24 PM](https://user-images.githubusercontent.com/63750347/185276631-50f98f4f-2918-402d-abd8-5faf1a79df64.png)
