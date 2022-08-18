@@ -98,12 +98,12 @@
 		98AF34EA28AB1F7B006F3311 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
+				980F69B328AD45BD0027A31B /* ColorConvert.swift */,
 				98AF34EB28AB1F7B006F3311 /* ChartApp.swift */,
 				98AF354D28ABEE94006F3311 /* API.swift */,
 				98AF34ED28AB1F7B006F3311 /* ContentView.swift */,
 				98AF34EF28AB1F7D006F3311 /* Assets.xcassets */,
 				98AF34F128AB1F7D006F3311 /* Preview Content */,
-				980F69B328AD45BD0027A31B /* ColorConvert.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";

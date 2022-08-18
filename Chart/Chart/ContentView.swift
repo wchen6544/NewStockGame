@@ -21,6 +21,7 @@ struct ContentView: View {
     
     let company: String
     let symbol: String
+    let closedPrice: String
     
     var bounds = UIScreen.main.bounds
     var width: CGFloat
@@ -35,10 +36,12 @@ struct ContentView: View {
     init() {
         
         let allData = apiCalls.getDataPoints()
+        
         data = allData.0
         dates = allData.1
         company = allData.2
         symbol = allData.3
+        closedPrice = allData.4
         minY = data.min() ?? 0
         maxY = data.max() ?? 0
         
@@ -52,7 +55,6 @@ struct ContentView: View {
         let tmp = addToList(data: data, maxY: maxY, minY: minY, width: width, height: height)
         distances = tmp.1
         map = tmp.0
-        //let result = apiCalls.getData()
         
     }
 
@@ -70,6 +72,8 @@ struct ContentView: View {
     @State var currentPrice: String = ""
     @State var currentDate: String = ""
     
+    @State var differenceSincePrevClose: String = ""
+    
     @State var isHidden: Bool = false
     
     @State var pointColor: UIColor = UIColor.clear
@@ -81,27 +85,19 @@ struct ContentView: View {
         
         ZStack {
                     
-                    VStack (alignment: .leading, spacing: 0) {
+            VStack (alignment: .leading, spacing: 0) {
+                
+                textBox
+                chartComponent
                         
-                            /*
-
-                            */
-                        textBox
-                        chartComponent
+                Spacer().frame(height: 300)
                         
-                        Spacer()
-                            .frame(height: 300)
-                        
-                        userStockData
-                        customButtons
-                        
-                    }
-                    
-
-            
+                userStockData
+                customButtons
+            }
         }
         .background(backgroundColor.ignoresSafeArea())
-        
+        .preferredColorScheme(.dark) // makes top bar text white
 
     }
     
@@ -221,6 +217,7 @@ extension ContentView {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(buttonColor)
                 )
+                .shadow(color: buttonColor, radius: 20, x: 0.0, y: 0.0)
                 Spacer()
             }.frame(maxHeight: .infinity, alignment: .top)
            // .border(Color.yellow, width: 1)
@@ -262,12 +259,12 @@ extension ContentView {
             .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack {
-                Text("+ 0.11 (0.3%)")
+                Text(calculatePlusMinus(hoveredPrice: hoveredPrice, closedPrice: closedPrice))
                     .bold()
 
                     .font(Font.system(size: 15))
                     .foregroundColor(textColor)
-                    
+                    .tracking(0.5)
                     .padding(EdgeInsets(top: 0.0, leading: 30.0, bottom: 0.0, trailing: 0.0))
                     .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -346,6 +343,8 @@ extension ContentView {
     }
 }
 
+
+
 private var IndicatorPoint: some View {
     ZStack {
         Circle()
@@ -358,6 +357,33 @@ private var IndicatorPoint: some View {
 }
 
 
+public func calculatePlusMinus(hoveredPrice: String, closedPrice: String) -> String {
+    //"+ 0.11 (0.3%)"
+    //print(hoveredPrice, closedPrice)
+    if hoveredPrice.count != 0 && closedPrice.count != 0 {
+        let hoveredPriceToDouble = Double(hoveredPrice.components(separatedBy: "$")[1])!
+        let closedPriceToDouble = Double(closedPrice.components(separatedBy: "$")[1])!
+        let difference = hoveredPriceToDouble - closedPriceToDouble
+        var stringBuilder = ""
+        let formula = round(((difference / closedPriceToDouble) * 100) * 100) / 100
+        if formula < 0 {
+            stringBuilder += (String(round(difference * 100) / 100) + " (" + String(formula) + "%)")
+        } else {
+            stringBuilder += ("+" + String(round(difference * 100) / 100) + " (+" + String(formula) + "%)")
+        }
+        
+        
+        print(stringBuilder)
+        return stringBuilder
+    } else {
+        return ""
+    }
+
+
+    
+    
+    
+}
 
 func addToList(data: [Double], maxY: Double, minY: Double, width: CGFloat, height: CGFloat) -> ([Double: Double], [CGFloat]) {
     
@@ -401,3 +427,11 @@ func getClosestValue(to pivot: CGFloat, from values: [CGFloat]) -> CGFloat? {
     }
 }
 
+
+
+class ViewController: UIViewController {
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+}

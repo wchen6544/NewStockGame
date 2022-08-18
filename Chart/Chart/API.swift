@@ -61,66 +61,7 @@ class API {
         return (date, price)
     }
 
-    
-    public func getData() -> ([(String, Double)], String, String) {
-        
-        var company = ""
-        var stockName = ""
-        var prices:[(String, Double)] = []
-        var done = false
-        var count = 0
-        let url = URL(string: "https://api.nasdaq.com/api/quote/AAPL/chart?assetclass=stocks")!
-
-        let task: Void = URLSession.shared.dataTask(with: url) {(data, response, error) in
-            guard let data = data else { return }
-            
-            do{
-                let classroom = try! JSONDecoder().decode(FData.self, from: data)
-                company = classroom.data.company
-                stockName = classroom.data.symbol
-                for student in classroom.data.chart  {
-                    var priceDate = ""
-                    var priceVal = 0.0
-                    count += 1
-                    
-                    if let price = Double(student.z.value) {
-                        if count % 10 == 0 {
-                                  //5
-                            //prices.insert(price, at: 0)
-                            priceVal = price
-                            
-                            let date = String(student.z.dateTime)
-
-                            priceDate = date
-                            
-                            prices.insert(self.createTT(date: priceDate, price: priceVal), at: 0)
-
-                        }
-                        
-
-                        
-
-                    } else {
-                        print("Not a valid number")
-                    }
-                    
-                    
-                }
-                done = true
-
-                
-            }catch{ print("errorMsg") }
-        }.resume()
-        
-
-        repeat {
-            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
-        } while !done
-        
-        return (prices, company, stockName)
-        
-    }
-    
+    /*
     
     public func liveData() -> [(String, Double)] {
         /*
@@ -168,11 +109,13 @@ class API {
         return info
     }
     
+     */
     
-    public func getDataPoints() -> ([Double], [String], String, String) {
+    public func getDataPoints() -> ([Double], [String], String, String, String) {
         
         var company = ""
         var stockName = ""
+        var closedPrice = ""
         
         var prices:[Double] = []
         var dates:[String] = []
@@ -188,6 +131,7 @@ class API {
                 let classroom = try! JSONDecoder().decode(FData.self, from: data)
                 company = classroom.data.company
                 stockName = classroom.data.symbol
+                closedPrice = classroom.data.previousClose
                 for student in classroom.data.chart  {
                     var priceDate = ""
                     var priceVal = 0.0
@@ -195,8 +139,7 @@ class API {
                     
                     if let price = Double(student.z.value) {
                         if count % 5 == 0 {
-                                  //5
-                            //prices.insert(price, at: 0)
+
                             priceVal = price
                             
                             let date = String(student.z.dateTime)
@@ -228,8 +171,8 @@ class API {
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
         } while !done
         
-        return (prices, dates, company, stockName)
+        return (prices, dates, company, stockName, closedPrice)
         
     }
-
 }
+    
