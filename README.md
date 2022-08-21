@@ -15,3 +15,11 @@ Allows users to track data from over 8000 different stocks and provides users wi
 
 
 ## Custom Animations
+
+
+https://user-images.githubusercontent.com/63750347/185803423-ed434db4-c3af-4c3e-a584-828d9439f927.mov
+
+
+
+https://user-images.githubusercontent.com/63750347/185803425-6a3c7bac-ffd5-49b0-b371-3fa16ad05583.mov
+
