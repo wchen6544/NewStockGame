@@ -1,10 +1,11 @@
 # Stock Market App
 
-<img src="![Screen Shot 2022-08-16 at 3 30 38 PM](https://user-images.githubusercontent.com/63750347/184965933-6bc443e3-46fb-49cc-9876-1e6253747731.png)" align="right"
-     alt="Size Limit logo by Anton Lovchikov" width="120" height="178">
+Allows users to track data from over 8000 different stocks and provides users with real-time data. Features a intuitive dashboard which allows users to track their top performing stocks. Built using custom chart library to reduce CPU usage by over 80% compared to others. Designed using Figma and developed using SwiftUI.
+* Average CPU usage : 5%
+* Memory Usage: 20-25MB
 
 
-# Custom Chart Library, improved CPU usage by a lot (from 78% -> 2%)
+
 
 # Old
 
