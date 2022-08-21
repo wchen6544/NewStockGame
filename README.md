@@ -7,7 +7,9 @@ Allows users to track data from over 8000 different stocks and provides users wi
 
 ## Views
 
-<p>
-  <img src="https://raw.githubusercontent.com/wchen6544/NewStockMarket/main/Screen%20Shot%202022-08-21%20at%201.15.27%20PM.png" alt="Port" width="50%" height="50%" align="right">
-  <img src="https://raw.githubusercontent.com/wchen6544/NewStockMarket/main/Screen%20Shot%202022-08-21%20at%201.15.36%20PM.png" alt="Chart" width="50%" height="50%" align="left">
-</p>
+
+<tr>
+  <td>  <img src="https://raw.githubusercontent.com/wchen6544/NewStockMarket/main/Screen%20Shot%202022-08-21%20at%201.15.27%20PM.png" alt="Port" width="50%" height="50%" align="center"></td>
+  <td><img src="https://raw.githubusercontent.com/wchen6544/NewStockMarket/main/Screen%20Shot%202022-08-21%20at%201.15.36%20PM.png" alt="Chart" width="50%" height="50%" align="center"></td>
+
+</tr>
