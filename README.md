@@ -5,18 +5,8 @@ Allows users to track data from over 8000 different stocks and provides users wi
 * Memory Usage: 20-25MB
 
 
+## Portfolio View
 
-
-# Old
-
-# New
-https://user-images.githubusercontent.com/63750347/185238155-edc4da94-0226-4428-a348-53d06fd79fce.mov
-
-# Newer
-
-
-![Screen Shot 2022-08-17 at 10 07 24 PM](https://user-images.githubusercontent.com/63750347/185276631-50f98f4f-2918-402d-abd8-5faf1a79df64.png)
-
-# Portfolio Tab
-
-![Screen Shot 2022-08-19 at 8 13 43 PM](https://user-images.githubusercontent.com/63750347/185721608-8056ba01-a56b-46ef-a4b6-9e4bedee080b.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/wchen6544/NewStockMarket/main/Screen%20Shot%202022-08-21%20at%201.15.27%20PM.png" alt="Port" width="650">
+</p>
