@@ -102,6 +102,7 @@ struct StockView: View {
         }
         .background(backgroundColor.ignoresSafeArea())
         .preferredColorScheme(.dark) // makes top bar text white
+        
 
 
     }

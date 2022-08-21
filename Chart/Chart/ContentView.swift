@@ -86,6 +86,12 @@ struct ContentView: View {
             
         TabView {
             
+            PortfolioView()
+                .tabItem() {
+                    Image(systemName: "chart.pie")
+                    Text("Portfolio")
+                }
+            
             HomeView()
                 .tabItem() {
                     Image(systemName: "phone.fill")
@@ -100,13 +106,10 @@ struct ContentView: View {
                     Text("Trade")
                 }
             
-            PortfolioView()
-                .tabItem() {
-                    Image(systemName: "chart.pie")
-                    Text("Portfolio")
-                }
+
             
         }
+
 
     }
     

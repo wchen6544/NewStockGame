@@ -9,6 +9,11 @@ import Foundation
 
 class API {
 
+    struct ReturnData: Codable {
+        var data: [Double]
+        
+    }
+    
     struct Date_Price: Codable {
         var dateTime: String
         var value: String
@@ -174,7 +179,7 @@ class API {
         return (prices, dates, company, stockName, closedPrice)
         
     }
-    public func getDataPointsPortfolio() -> ([Double], [String], String, String, String) {
+    public func getDataPointsPortfolio(symbol: String) -> ([Double], [String], String, String, String) {
         
         var company = ""
         var stockName = ""
@@ -185,7 +190,7 @@ class API {
         
         var done = false
         var count = 0
-        let url = URL(string: "https://api.nasdaq.com/api/quote/AAPL/chart?assetclass=stocks")!
+        let url = URL(string: "https://api.nasdaq.com/api/quote/" + symbol + "/chart?assetclass=stocks")!
 
         let _: Void = URLSession.shared.dataTask(with: url) {(data, response, error) in
             guard let data = data else { return }
@@ -231,11 +236,16 @@ class API {
         
 
         repeat {
+            
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+
+            
         } while !done
         
         return (prices, dates, company, stockName, closedPrice)
         
     }
+
+    
 }
     
