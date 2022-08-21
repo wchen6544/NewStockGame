@@ -13,3 +13,5 @@ Allows users to track data from over 8000 different stocks and provides users wi
   <img alt="chart" src="https://raw.githubusercontent.com/wchen6544/NewStockMarket/main/Screen%20Shot%202022-08-21%20at%201.15.36%20PM.png" width="45%">
 </p>
 
+
+## Custom Animations
