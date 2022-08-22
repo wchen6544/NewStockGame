@@ -23,3 +23,6 @@ https://user-images.githubusercontent.com/63750347/185803423-ed434db4-c3af-4c3e-
 
 https://user-images.githubusercontent.com/63750347/185803425-6a3c7bac-ffd5-49b0-b371-3fa16ad05583.mov
 
+### Encountered Problems
+
+One of the problems I encountered during this project was waiting for the JSON data to load before drawing the charts in the Portfolio Tab. My first solution involed using ```swift RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1)) ```. This solution works if you are loading/rendered one view, but doesn't work for multiple. After a while researching I came across DispatchGroup. First you initalize a group ```swift let dispatchGroup = DispatchGroup() ```. Then you enter the group and when the data is loaded you can leave. After leaving include a dispatchGroup.wait() command until your return block
