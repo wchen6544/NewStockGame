@@ -26,7 +26,6 @@ struct StockView: View {
     
     var bounds = UIScreen.main.bounds
     var width: CGFloat
-    var height: CGFloat
     
     @State private var percentage: CGFloat = 0
     @State public var map: [Double: Double]
@@ -36,8 +35,8 @@ struct StockView: View {
     
     init() {
         
-        let allData = apiCalls.getDataPoints()
-        
+        let allData = apiCalls.getDataPointsTesting()
+
         data = allData.0
         dates = allData.1
         company = allData.2
@@ -51,9 +50,8 @@ struct StockView: View {
 
         
         width = bounds.size.width
-        height = bounds.size.height
         
-        let tmp = addToList(data: data, maxY: maxY, minY: minY, width: width, height: height)
+        let tmp = addToList(data: data, maxY: maxY, minY: minY, width: width)
         distances = tmp.1
         map = tmp.0
         
@@ -70,52 +68,34 @@ struct StockView: View {
     
     @State var hoveredPrice: String = ""
     @State var hoveredDate: String = ""
-    @State var currentPrice: String = ""
-    @State var currentDate: String = ""
-    
-    @State var differenceSincePrevClose: String = ""
-    
+        
     @State var isHidden: Bool = false
     
     @State var pointColor: UIColor = UIColor.clear
     
-    //let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
-    
-    
     var body: some View {
         
-        
         ZStack {
-                    
-
             
             VStack (alignment: .leading, spacing: 0) {
                 
                 textBox
+                
                 chartComponent
                         
                 Spacer().frame(height: 300)
                         
                 userStockData
                 customButtons
+                
             }
         }
         .background(backgroundColor.ignoresSafeArea())
-        .preferredColorScheme(.dark) // makes top bar text white
-        
-
+        .preferredColorScheme(.dark) // makes top bar text whitee
 
     }
-    
-    
-    
 }
 
-struct StockView_Previews: PreviewProvider {
-    static var previews: some View {
-        StockView()
-    }
-}
 
 extension StockView {
     private var chartView: some View {
@@ -124,12 +104,8 @@ extension StockView {
                 
                 for index in data.indices {
                     
-                    //let xPosition = (geometry.size.width) / CGFloat(data.count) * CGFloat(index + 1)
                     let xPosition = 16 + (((width - 32) / CGFloat(data.count)) * CGFloat(index + 1))
-
-                    
                     let yAxis = maxY - minY
-                    
                     let yPosition = (1 - CGFloat((data[index] - minY) / yAxis)) * 300
                     
                     if index == 0 {
@@ -143,7 +119,6 @@ extension StockView {
             .stroke(lineColor, style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
             .shadow(color: lineColor, radius: 10, x: 0.0, y: 0.0)
         }
-        //.border(Color.orange, width: 1)
     }
     
 
@@ -188,43 +163,42 @@ extension StockView {
                 }
                 .padding(EdgeInsets(top: 0, leading: 50.0, bottom: 0, trailing: 50.0))
                     
-                    //.padding(EdgeInsets(top: 40.0, leading: 30.0, bottom: 0.0, trailing: 0.0))
             }
-            
-
             Spacer()
         }
         .frame(maxHeight: .infinity, alignment: .center)
-        //.border(Color.white, width: 1)
-        
     }
 }
 
 
 extension StockView {
     
-    
     private var customButtons: some View {
         
-
+        HStack {
+            Spacer()
             
-            HStack {
-                Spacer()
-                Button("Trade Stocks") {
-                }
-                .font(.system(size: 15, weight: .bold, design: .default))
-                .foregroundColor(Color.white)
-                .frame(width: width - 70, height: 15)
-                .padding()
-                .background(
+            Button(action: {
+                
+                print("Clicked")
+                
+            }, label: {
+                Text("Trade stocks")
+            })
+            
+            .font(.system(size: 15, weight: .bold, design: .default))
+            .foregroundColor(Color.white)
+            .frame(width: width - 70, height: 15)
+            .padding()
+            .background(
 
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(buttonColor)
-                )
-                .shadow(color: buttonColor, radius: 20, x: 0.0, y: 0.0)
-                Spacer()
-            }.frame(maxHeight: .infinity, alignment: .top)
-           // .border(Color.yellow, width: 1)
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(buttonColor)
+            )
+            .shadow(color: buttonColor, radius: 20, x: 0.0, y: 0.0)
+            
+            Spacer()
+        }.frame(maxHeight: .infinity, alignment: .top)
 
         
         
@@ -255,7 +229,6 @@ extension StockView {
                     .foregroundColor(textColor)
                     
                     .padding(EdgeInsets(top: -10.0, leading: 30.0, bottom: 0.0, trailing: 0.0))
-                    //.border(Color.blue, width: 4)
                     .onAppear{
                         hoveredPrice = "$171.15"
                     }
@@ -280,15 +253,8 @@ extension StockView {
                 
                     .padding(EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 30.0))
                     .frame(alignment: .trailing)
-
-                
-                
             }
-            
-            
         }
-       // .border(Color.red, width: 1)
-        
 
     }
 }
@@ -299,8 +265,6 @@ extension StockView {
         ZStack {
             
             GeometryReader { geometry in
-
-
                 chartView
                     .frame(height: 400)
                     .gesture(
@@ -308,19 +272,13 @@ extension StockView {
                             .onChanged { value in
 
                                 isHidden = true
-                                
                                 xVal = getClosestValue(to: value.location.x, from: distances)!
-                                
-                                // gets the price according to the index of the data points (x coordinate)
                                 let priceIndex = round(Double(data[distances.firstIndex(of: xVal)!] * 100.0)) / 100.0
-                                
                                 let dateIndex = String(dates[distances.firstIndex(of: xVal)!])
-                                
                                 yVal = ((Double(geometry.frame(in: .global).minY)) - 120) + map[xVal]!
 
                                 hoveredPrice = "$" + String(priceIndex)
                                 hoveredDate = dateIndex
-
                             }
                             .onEnded { _ in }
                     )
@@ -331,7 +289,6 @@ extension StockView {
                     }
                     .position(x: (Double(geometry.frame(in: .global).midX)), y: 250)
                     
-                
                 IndicatorPoint
                     .position(x: CGFloat(xVal), y: yVal)
                     .opacity(isHidden ? 1 : 0)
@@ -339,10 +296,6 @@ extension StockView {
             }
             
         }
-        //.border(Color.blue, width: 1)
-        
-        
-
     }
 }
 
@@ -361,8 +314,7 @@ private var IndicatorPoint: some View {
 
 
 public func calculatePlusMinus(hoveredPrice: String, closedPrice: String) -> String {
-    //"+ 0.11 (0.3%)"
-    //print(hoveredPrice, closedPrice)
+
     if hoveredPrice.count != 0 && closedPrice.count != 0 {
         let hoveredPriceToDouble = Double(hoveredPrice.components(separatedBy: "$")[1])!
         let closedPriceToDouble = Double(closedPrice.components(separatedBy: "$")[1])!
@@ -375,19 +327,13 @@ public func calculatePlusMinus(hoveredPrice: String, closedPrice: String) -> Str
             stringBuilder += ("+" + String(round(difference * 100) / 100) + " (+" + String(formula) + "%)")
         }
         
-        
         return stringBuilder
     } else {
-        return "hello"
+        return ""
     }
-
-
-    
-    
-    
 }
 
-func addToList(data: [Double], maxY: Double, minY: Double, width: CGFloat, height: CGFloat) -> ([Double: Double], [CGFloat]) {
+func addToList(data: [Double], maxY: Double, minY: Double, width: CGFloat) -> ([Double: Double], [CGFloat]) {
     
     var dictionary: [Double: Double] = [:]
     var list: [CGFloat] = []
@@ -395,19 +341,11 @@ func addToList(data: [Double], maxY: Double, minY: Double, width: CGFloat, heigh
     
     for index in data.indices {
             
-        
         let xPosition = 16 + (((width - 32) / CGFloat(data.count)) * CGFloat(index + 1))
-        
-        
         let yAxis = maxY - minY
-        
         let yPosition = CGFloat((1 - CGFloat((data[index] - minY) / yAxis)) * 300)
-        
-        
-        
         list.append(xPosition)
         dictionary[xPosition] = yPosition
-        
         
     }
     return (dictionary, list)

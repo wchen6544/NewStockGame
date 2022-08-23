@@ -36,13 +36,10 @@ struct PortfolioView: View {
                     ColorConvert().convertColor(hexString: "#0A0A0F")
                     
                     VStack (alignment: .leading, spacing: 0) {
-                        
                                                         
                         userStockData
                             .padding(.top, -50)
-                        
-                            //.border(Color.red, width: 1)
-                        
+                                                
                         HStack (spacing: 0) {
                         
                             Text("Holding")
@@ -50,13 +47,10 @@ struct PortfolioView: View {
                                 .font(.system(size: 25, weight: .bold, design: .default))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.leading, 20)
-                               // .border(Color.red, width: 1)
                             Text("View all")
                                 .padding(.trailing, 20)
                                 .frame(maxWidth: .infinity, alignment: .trailing)
-                               // .border(Color.orange, width: 1)
-
-                            
+                             
                         }
                         
                         Holding(
@@ -101,25 +95,12 @@ struct PortfolioView: View {
                     
                 }
                 .edgesIgnoringSafeArea(.all)
-              //  .border(Color.white, width: 1)
-                
             }
             .background(backgroundColor.ignoresSafeArea(.all))
-
         }
-        .background(backgroundColor.ignoresSafeArea(.all))
-        
-
-
         
         .preferredColorScheme(.dark) // makes top bar text white
-        
-
     }
-    
-    
-    
-    
 }
 
 struct Portfolio_Previews: PreviewProvider {
@@ -135,7 +116,6 @@ struct Portfolio_Previews: PreviewProvider {
 extension PortfolioView {
     
     private var userStockData: some View {
-
         
         HStack {
             Spacer()
@@ -171,15 +151,11 @@ extension PortfolioView {
                                 .foregroundColor(ColorConvert().convertColor(hexString: "#36C03C"))
 
                         }
-                        
-
-                            
                     }
                     .font(.system(size: 15, weight: .bold, design: .default))
 
                 }
                 .frame(width: width - 120, height: 120)
-
             }
             Spacer()
         }
@@ -208,10 +184,11 @@ struct ChartComponent: View {
     
     init(symbol: String) {
         
+        
         let allData = apiCalls.getDataPointsPortfolio(symbol: symbol)
         
         self.data = allData.0
-        self.symbol = allData.3
+        self.symbol = allData.1
 
         minY = data.min() ?? 0
         maxY = data.max() ?? 0
@@ -263,18 +240,6 @@ struct ChartComponent: View {
                 .position(x: (geometry.size.width) / 3, y: 220)
             }
         }
-        
-    }
-}
-
-
-
-
-
-
-struct PortfolioView_Previews: PreviewProvider {
-    static var previews: some View {
-        PortfolioView()
         
     }
 }

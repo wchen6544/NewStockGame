@@ -20,6 +20,7 @@
 		98AF350728AB1F7D006F3311 /* ChartUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AF350628AB1F7D006F3311 /* ChartUITests.swift */; };
 		98AF350928AB1F7D006F3311 /* ChartUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AF350828AB1F7D006F3311 /* ChartUITestsLaunchTests.swift */; };
 		98AF354E28ABEE94006F3311 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AF354D28ABEE94006F3311 /* API.swift */; };
+		98CF1EE828B43D6B0048F9D8 /* ChartComp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CF1EE728B43D6B0048F9D8 /* ChartComp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		98AF350628AB1F7D006F3311 /* ChartUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartUITests.swift; sourceTree = "<group>"; };
 		98AF350828AB1F7D006F3311 /* ChartUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		98AF354D28ABEE94006F3311 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		98CF1EE728B43D6B0048F9D8 /* ChartComp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartComp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				985630FF28AEFAA20007892E /* PortfolioView.swift */,
 				9856310128AEFAAE0007892E /* HomeView.swift */,
 				9874D3DA28B1417E00112982 /* Holding.swift */,
+				98CF1EE728B43D6B0048F9D8 /* ChartComp.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				98AF34EE28AB1F7B006F3311 /* ContentView.swift in Sources */,
 				980F69B428AD45BD0027A31B /* ColorConvert.swift in Sources */,
 				9874D3DB28B1417E00112982 /* Holding.swift in Sources */,
+				98CF1EE828B43D6B0048F9D8 /* ChartComp.swift in Sources */,
 				98AF354E28ABEE94006F3311 /* API.swift in Sources */,
 				98AF34EC28AB1F7B006F3311 /* ChartApp.swift in Sources */,
 			);
